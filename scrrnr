@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+#Simple script to provide arguments to
+# custom .screenrc files, and concatenate
+# them with a main .screenrc with settings
+
+function usage() {
+	echo "Usage: ${0##*/} screenrc"
+}
+
+FILE="/tmp/scrnr.$RANDOM.rc"
+
+if [ $# -lt 1 ]; then
+	usage
+	exit 1
+fi
+
+scrnrp="$1"
+
+if [ ! -f ".screen/$scrnrp" ]; then
+	usage
+	exit 1
+fi
+
+#consume first arg now that it's valid
+shift
+
+#echo "cat $HOME/.screenrc > $FILE"
+cat $HOME/.screenrc > $FILE
+
+if [ $# -ge 1 ]; then
+	cmd=""
+	i=0
+	for param in $@; do
+		let i+=1;
+		cmd=$cmd" | sed 's/\$$i/$param/' "
+	done
+	cmd=$cmd" | sed 's/\$\@/$@/' "
+fi
+
+#echo "cat .screen/$scrnrp $cmd >> $FILE"
+bash -c "cat .screen/$scrnrp $cmd >> $FILE"
+
+#echo "screen -S $scrnrp -c $FILE"
+screen -S $scrnrp -c $FILE -dRR
+
+#echo "rm $FILE"
+rm $FILE

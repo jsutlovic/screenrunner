@@ -1,0 +1,37 @@
+##.screenrc admin
+
+## Set up a screen session with 3 regions: 2 top and 1 bottom
+##  2 top regions are populated with df/free and htop, with
+##  the bottom region holding our shell
+
+###  Set up our screens  ###
+
+#Basic shell in window 1
+screen -t shell 1 
+
+#Root shell in window 2
+screen -t root 2 sudo su -
+
+#htop in window 3
+screen -t htop 3 htop
+
+#Show the output of df -h and free -mt, updated every 30 seconds
+screen -t mem 4 watch -n 30 "df -h; echo ''; free -mt"
+wrap          #allow wrapping of the content (just in case output is too long)
+
+
+
+###  Set up the regions  ###
+
+select mem    #first select window "mem" (we want it to be top left)
+split         #split the window horizontally (leaving mem on top)
+
+
+focus top     #make sure the screen focus is on the top region
+split -v      #now split the top region vertically (mem is top left now)
+focus down    #Go to the right region
+select htop   #we want htop in this region
+
+focus down    #go to the bottom region
+select shell  #we want the shell in the bottom
+

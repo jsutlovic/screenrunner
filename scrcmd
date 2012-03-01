@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+#Shortcut for sending commands to the current screen session
+
+if [ -n "$STY" ]; then
+	screen -X $@
+else
+	echo "screen not running"
+fi

@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+#Open an interactive bash shell with these commands:
+
+function usage() {
+	echo "Usage: bashrnr <command> [<command>...]"
+	echo "         command: quoted commands to pass to bash"
+}
+
+#Not quiet by default
+QUIET=1
+
+#echo $@
+#echo $1
+
+if [ "$1" == "-q" ]; then
+	QUIET=0
+	shift
+fi
+
+cmds="#!/usr/bin/env bash\n"
+for cmd in "$@"; do
+	if [ $QUIET -ne "0" ]; then
+		cmds=$cmds"\n echo -e '\n"$cmd": '"
+	else
+		cmds=$cmds"\n echo ''"
+	fi
+	cmds=$cmds"\n"$cmd
+done
+
+FILE="/tmp/bashrnr.$RANDOM.sh"
+echo -e $cmds > $FILE
+
+bash --rcfile $FILE
+
+rm $FILE
