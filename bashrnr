@@ -3,34 +3,71 @@
 #Open an interactive bash shell with these commands:
 
 function usage() {
-	echo "Usage: bashrnr <command> [<command>...]"
-	echo "         command: quoted commands to pass to bash"
+	echo "Usage: bashrnr [-q] [-b] <command> [<command>...]"
+	echo "             q: Quiet mode, don't print the commands being run"
+	echo "             b: Copy user's .bashrc into custom bashrc"
+	echo "       command: quoted commands to pass to bash"
 }
 
 #Not quiet by default
 QUIET=1
+#Don't copy by default
+BRCCPY=1
 
-#echo $@
-#echo $1
+#Set up a random file
+FILE="/tmp/bashrnr.$RANDOM.sh"
 
-if [ "$1" == "-q" ]; then
-	QUIET=0
-	shift
+#Start of with a shebang
+echo -e '#!/usr/bin/env bash\n' > $FILE
+
+#Loop through our short options
+while getopts ":qb" opt; do
+	case $opt in
+		q)
+			#Set quiet
+			QUIET=0
+			;;
+		b)
+			#Set .bashrc copy
+			BRCCPY=0
+			;;
+		\?)
+			# Wrong option? Echo error to stderr
+			echo "Invalid option: $OPTARG" >&2
+			# Print usage
+			usage
+			;;
+	esac
+done
+
+#Shift to past the last short option
+shift $((OPTIND-1))
+
+if [ $BRCCPY -eq "0" ]; then
+	#Copy user's .bashrc
+	cat $HOME/.bashrc >> $FILE
 fi
 
-cmds="#!/usr/bin/env bash\n"
+#Start copying commands that we input:
+cmds=""
 for cmd in "$@"; do
+	#If we're not quiet
 	if [ $QUIET -ne "0" ]; then
+		#Output the command we'll be running
 		cmds=$cmds"\n echo -e '\n"$cmd": '"
 	else
+		#Just output a newline, so we can seperate command outputs
 		cmds=$cmds"\n echo ''"
 	fi
+
 	cmds=$cmds"\n"$cmd
 done
 
-FILE="/tmp/bashrnr.$RANDOM.sh"
-echo -e $cmds > $FILE
+#Output all our commands to the tempfile
+echo -e $cmds >> $FILE
 
+#Run the commands
 bash --rcfile $FILE
 
+#When interactive bash is done, remove the file
 rm $FILE
