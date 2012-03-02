@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
 #Shortcut for sending commands to the current screen session
+# Works the same as Ctrl+a : in screen, but can be used for scripting
 
 if [ -n "$STY" ]; then
-	screen -X $@
+	screen -X "$@"
 else
 	echo "screen not running"
 fi
