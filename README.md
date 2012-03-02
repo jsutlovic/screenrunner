@@ -20,9 +20,9 @@ A bash shell, GNU screen terminal multiplexer, a desire for simplified screen-in
 
 ## Setup ##
 
-`git://github.com/jsutlovic/screenrunner.git
- ./installer.sh
- scrrnr tester`
+`git://github.com/jsutlovic/screenrunner.git  
+./installer.sh  
+scrrnr tester`
 
 
 ## Examples ##
