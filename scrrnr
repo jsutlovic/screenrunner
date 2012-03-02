@@ -24,7 +24,7 @@ fi
 scrrnrws="$1"
 
 #Make sure it exists first
-if [ ! -f ".screen/$scrrnrws" ]; then
+if [ ! -f "$HOME/.screen/$scrrnrws" ]; then
 	echo "Not a file: .screen/$scrrnrws"
 	usage
 	exit 1
@@ -50,7 +50,7 @@ fi
 
 #Run the command to sub if there are any substitutions,
 #and add that to our temp screenrc
-bash -c "cat .screen/$scrrnrws $cmd >> $FILE"
+bash -c "cat $HOME/.screen/$scrrnrws $cmd >> $FILE"
 
 #Run screen with the rcfile (reattach an existing named session if it exists)
 screen -S $scrrnrws -c $FILE -dRR
