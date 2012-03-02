@@ -1,0 +1,31 @@
+##.screenrc tester
+
+## Set up a screen session with 3 windows,
+##  and two regions. The right region is a manpage,
+##  which will close once quit
+##  Also, show how parameter substitution works
+
+###  Windows ###
+
+#Open a new window with title 
+# "test" and window number 1
+# with contents: 
+screen -t test 1 bashrnr "echo $1 $2 $3 $4" "echo $@"
+
+#Open another window with
+# a shell in window 2, with these commands:
+screen -t test2 2 bashrnr "cd dev" "ls $1"
+
+#Close the region once we're done with the window
+screen -t test3 bash -c "man screen && scrcmd remove"
+
+
+###  Region setup  ###
+
+select 1        #Select screen 1 by default 
+split -v        #Split the window vertically
+
+focus down      #Select the right region
+select test3    #We want test3 in this region
+
+focus up        #Go back to the left region (test)

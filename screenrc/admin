@@ -4,6 +4,7 @@
 ##  2 top regions are populated with df/free and htop, with
 ##  the bottom region holding our shell
 
+
 ###  Set up our screens  ###
 
 #Basic shell in window 1
@@ -15,9 +16,10 @@ screen -t root 2 sudo su -
 #htop in window 3
 screen -t htop 3 htop
 
-#Show the output of df -h and free -mt, updated every 30 seconds
+#Show the output of df -h and free -mt, updated every 30 seconds,
+# and allow wrapping of the content (just in case output is too long)
 screen -t mem 4 watch -n 30 "df -h; echo ''; free -mt"
-wrap          #allow wrapping of the content (just in case output is too long)
+wrap          
 
 
 

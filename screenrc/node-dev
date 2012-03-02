@@ -1,0 +1,26 @@
+##.screenrc node-dev
+
+### Set up a simple environment for development in Node.js
+###  Folders assumed are /home/<user>/dev/node/x where x is
+###  passed by: scrrnr node-dev x
+
+
+###  Windows  ###
+
+# Window 1 for miscellaneous commands
+screen -t "misc" 1 
+
+# Window 2 for running node, in our working directory
+screen -t "node" 2 bashrnr -q "cd ~/dev/node/$1"
+
+# Window 3 for running git things, show the last 5 commits
+screen -t "git" 3 bashrnr -q "cd ~/dev/node/$1" "git log -n 5"
+
+# Window 4 for running root things
+screen -t "root" 4 sudo su -
+
+
+###  Regions/setup  ###
+
+#Select which window we want open by default
+select 1
