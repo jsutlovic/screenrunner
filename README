@@ -17,9 +17,7 @@ screenrc/* - A few examples of some custom window setups
 Setup:
 
 git://github.com/jsutlovic/screenrunner.git
-
 ./installer.sh
-
 scrrnr tester
 
 Examples: 

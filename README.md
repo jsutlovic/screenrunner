@@ -4,7 +4,7 @@ A set of shell scripts to run customised short .screenrc files in conjuction wit
 
 ## Requirements ##
 
-A bash shell, GNU screen terminal multiplexer, a desire for simplified screen-ing
+A bash shell, GNU [screen](http://www.gnu.org/s/screen/ ) terminal multiplexer, a desire for simplified screen-ing
 
 ## Provided ##
 
@@ -34,8 +34,8 @@ scrrnr tester`
 
 ### Why? ###
 
-I needed something to facilitate simple seperation of .screenrc sessions and allow for parameter substitution in them.
-byobu almost fit the bill, but it doesn't seem to do parameter substitution, nor does it have a simple way to run an interactive shell with multiple commands, so I wrote my own
+I needed something to facilitate simple seperation of .screenrc sessions and allow for parameter substitution in them.  
+[byobu](https://launchpad.net/byobu ) almost fit the bill, but it doesn't seem to do parameter substitution, nor does it have a simple way to run an interactive shell with multiple commands, so I wrote my own
 
 
 That is all, *for now*.
