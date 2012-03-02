@@ -14,9 +14,13 @@ if [ -f "$HOME/.screenrc" ]; then
 	mv $HOME/.screenrc $HOME/.screenrc.bak
 fi
 
+cp screenrc $HOME/.screenrc
+
 if [ -d "$HOME/.screen" ]; then
 	mv $HOME/.screen $HOME/.screen-bak
 fi
+
+cp -R screenrc $HOME/.screen
 
 if echo "$PATH" | grep "$HOME/bin" > /dev/null; then
 	echo -e "Looks like you're good to go!"
