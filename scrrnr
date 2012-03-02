@@ -5,7 +5,9 @@
 # them with a main .screenrc with settings
 
 function usage() {
-	echo "Usage: ${0##*/} screenrc"
+	echo "Usage: ${0##*/} scrrnrws"
+	echo "      scrrnrws: file formatted as a .screenrc to run"
+	echo "                in conjunction with \$HOME/.screenrc"
 }
 
 #Set up a temp file for our custom .screenrc
@@ -17,13 +19,13 @@ if [ $# -lt 1 ]; then
 	exit 1
 fi
 
-#Our first argument is the screenrc "project" file we want
+#Our first argument is the screenrunner window setup file we want
 #Also the name of the screen session
-scrnrp="$1"
+scrrnrws="$1"
 
 #Make sure it exists first
-if [ ! -f ".screen/$scrnrp" ]; then
-	echo "Not a file: .screen/$scrnrp"
+if [ ! -f ".screen/$scrrnrws" ]; then
+	echo "Not a file: .screen/$scrrnrws"
 	usage
 	exit 1
 fi
@@ -48,10 +50,10 @@ fi
 
 #Run the command to sub if there are any substitutions,
 #and add that to our temp screenrc
-bash -c "cat .screen/$scrnrp $cmd >> $FILE"
+bash -c "cat .screen/$scrrnrws $cmd >> $FILE"
 
 #Run screen with the rcfile (reattach an existing named session if it exists)
-screen -S $scrnrp -c $FILE -dRR
+screen -S $scrrnrws -c $FILE -dRR
 
 #Delete the temporary screenrc once our session is done
 rm $FILE
