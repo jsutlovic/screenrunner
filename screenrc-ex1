@@ -1,0 +1,102 @@
+##.screenrc
+
+## Default screen setup ##
+
+#we want a utf8 screen
+defutf8 on
+
+#Setup 10,000 lines of available scrollback - copy/paste
+defscrollback 10000
+
+#No start message
+startup_message off
+#Set messages timeout to one second:
+msgwait 1
+
+#Set the status message when a window that's being monitored has activity
+#Displays the window number/title and time for the activity
+activity "Activity in %n (%t) [%w:%s]~"
+
+#Show a message with the window number if we get a bell character
+bell_msg "Trouble in %n!"
+
+#Turn off annoying screen flash
+vbell off
+#If our terminal doesn't support a visual bell, send a message
+vbell_msg "Beep Beep ..."
+
+#Detach on HUP
+autodetach on
+
+#Show this message when a 'power detach' is performed
+pow_detach_msg "Force detached!"
+
+#Use bash as the default shell opened
+shell bash
+
+## Bindings ##
+
+bind = resize =    #ctrl-a = even split regions
+bind + resize +1   #ctrl-a + make region bigger +1
+bind - resize -1   #ctrl-a - make region smaller -1
+bind _ resize max  #ctrl-a _ maximize this region
+bind c screen 1    #window numbering starts at 1, not 0.
+bind 0 select 10   #ctrl-a 0 Select screen 10
+
+# make life easier, f1-f10 selects screens 0-9
+bindkey -k k1 select 1
+bindkey -k k2 select 2
+bindkey -k k3 select 3
+bindkey -k k4 select 4
+bindkey -k k5 select 5
+bindkey -k k6 select 6
+bindkey -k k7 select 7
+bindkey -k k8 select 8
+bindkey -k k9 select 9
+bindkey -k k0 select 0
+
+#Copy mode is F11
+#Paste mode is F12
+bindkey -k F1 copy
+bindkey -k F2 paste .
+
+#prev window with ctrl-left
+#next window with ctrl-right
+bindkey "\033[D" prev
+bindkey "\033[C" next
+
+#move focus up with ctrl-up
+#move focus down with ctrl-down
+bindkey "\033[A" focus up
+bindkey "\033[B" focus down
+
+
+## Terminal things ##
+
+#Color term
+term screen-256color
+# fix scrollback in putty
+termcapinfo xterm* ti@:te@
+# tell screen that xterm can switch to dark background and has function keys.
+termcapinfo xterm 'VR=\E[?5h:VN=\E[?5l'
+termcapinfo xterm 'k1=\E[11~:k2=\E[12~:k3=\E[13~:k4=\E[14~'
+termcapinfo xterm 'kh=\EOH:kI=\E[2~:kD=\E[3~:kH=\EOF:kP=\E[5~:kN=\E[6~'
+termcapinfo xterm 'vi=\E[?25l:ve=\E[34h\E[?25h:vs=\E[34l'
+# uses background color for delete operations
+termcapinfo xterm* be
+termcapinfo         linux "ve=\E[?25h\E[?17;0;64c"
+
+
+## Screen display options: ##
+
+#Show screen messages on a 
+
+#Show a caption only when we've split the screen:
+#Blue background, white text for selected window, otherwise black
+caption splitonly "%?%F%{= bW}%:%{= bk}%?%50=%t"
+
+#Show a tab-bar at the bottom
+hardstatus on
+hardstatus alwayslastline
+#Displays as: [ hostname ][    (title1) (title2)    ][ dd/mm hh:mm ]
+hardstatus string '%{= kG}[ %{W}%H %{g}][%= %{= kw}%?%-Lw%?%{b}(%{W}%n*%f%t%?(%u)%?%{b})%{w}%?%+Lw%?%?%= %{g}][%{C} %d/%m %{C}%c %{g}]'
