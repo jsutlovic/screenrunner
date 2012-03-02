@@ -20,10 +20,10 @@ A bash shell, GNU [screen](http://www.gnu.org/s/screen/ ) terminal multiplexer, 
 
 ## Setup ##
 
-`git clone git://github.com/jsutlovic/screenrunner.git  `
-`cd screenrunner  `
-`./installer.sh  `
-`scrrnr tester`
+`git clone git://github.com/jsutlovic/screenrunner.git`  
+`cd screenrunner`  
+`./installer.sh`  
+`scrrnr tester`  
 
 
 ## Examples ##
