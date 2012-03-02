@@ -11,16 +11,19 @@ fi
 cp -t $HOME/bin scrrnr scrcmd bashrnr
 
 if [ -f "$HOME/.screenrc" ]; then
-	mv $HOME/.screenrc $HOME/.screenrc.bak
+	echo "You already have a .screenrc, setting ours up in $HOME/.screenrc-scrrnr"
+	cp screenrc-ex1 $HOME/.screenrc-scrrnr
+else
+	cp screenrc-ex1 $HOME/.screenrc
 fi
 
-cp screenrc-ex1 $HOME/.screenrc
 
 if [ -d "$HOME/.screen" ]; then
-	mv $HOME/.screen $HOME/.screen-bak
+	echo "$HOME/.screen already exists, not copying"
+else
+	cp -R screenrc $HOME/.screen
 fi
 
-cp -R screenrc $HOME/.screen
 
 if echo "$PATH" | grep "$HOME/bin" > /dev/null; then
 	echo -e "Looks like you're good to go!"
