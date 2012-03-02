@@ -1,0 +1,26 @@
+##.screenrc node-dev
+
+### Set up a simple environment for bash development
+
+###  Windows  ###
+
+# Window 1 for miscellaneous commands
+screen -t "misc" 1 
+
+# Window 2 for running shells, in our working directory
+screen -t "shell" 2 bashrnr -q "cd ~/dev/bash/screenrunner"
+
+# Window 3 for running git things, show the last 5 commits and a diff
+screen -t "git" 3 bashrnr "cd ~/dev/bash/screenrunner" "git --no-pager log -n 5 --pretty=short" "git diff"
+
+
+###  Regions/setup  ###
+
+#Select which window we want open by default
+select 2
+
+split -v    #split vertically
+focus down  #select right panel
+select 3    #select git
+focus up
+
