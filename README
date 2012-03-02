@@ -20,6 +20,7 @@ git://github.com/jsutlovic/screenrunner.git
 
 ./installer.sh
 
+scrrnr tester
 
 Examples: 
 
