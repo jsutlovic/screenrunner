@@ -7,9 +7,8 @@
 
 ###  Windows ###
 
-#Open a new window with title 
-# "test" and window number 1
-# with contents: 
+#Open a new window with title "test" and window number 1,
+# with these commands:
 screen -t test 1 bashrnr "echo $1 $2 $3" "echo $@"
 
 #Open another window with
@@ -17,7 +16,7 @@ screen -t test 1 bashrnr "echo $1 $2 $3" "echo $@"
 screen -t test2 2 bashrnr "ls ~"
 
 #Close the region once we're done with the window
-screen -t test3 bash -c "man screen && scrcmd remove"
+screen -t test3 3 bash -c "man screen && scrcmd remove"
 
 
 ###  Region setup  ###
