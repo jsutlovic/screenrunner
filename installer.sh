@@ -14,7 +14,7 @@ if [ -f "$HOME/.screenrc" ]; then
 	mv $HOME/.screenrc $HOME/.screenrc.bak
 fi
 
-cp screenrc $HOME/.screenrc
+cp screenrc-ex1 $HOME/.screenrc
 
 if [ -d "$HOME/.screen" ]; then
 	mv $HOME/.screen $HOME/.screen-bak
