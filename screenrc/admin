@@ -25,14 +25,14 @@ wrap
 
 ###  Set up the regions  ###
 
-select mem    #first select window "mem" (we want it to be top left)
+select htop   #first select window "htop" (we want it to be top left)
 split         #split the window horizontally (leaving mem on top)
 
 
 focus top     #make sure the screen focus is on the top region
 split -v      #now split the top region vertically (mem is top left now)
 focus down    #Go to the right region
-select htop   #we want htop in this region
+select mem    #we want a memory display in this region
 
 focus down    #go to the bottom region
 select shell  #we want the shell in the bottom
