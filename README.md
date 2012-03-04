@@ -20,17 +20,22 @@ A bash shell, GNU [screen](http://www.gnu.org/s/screen/ ) terminal multiplexer, 
 
 ## Setup ##
 
-`git clone git://github.com/jsutlovic/screenrunner.git`  
-`cd screenrunner`  
-`./installer.sh`  
-`scrrnr tester`  
-
+```bash
+$ git clone git://github.com/jsutlovic/screenrunner.git
+$ cd screenrunner
+$ ./installer.sh
+$ scrrnr tester
+```
 
 ## Examples ##
 
-`scrrnr tester 1 2 3 4 5`
+```bash
+$ scrrnr tester 1 2 3 4 5
+```
 
-`scrrnr admin`
+```bash
+scrrnr admin
+```
 
 
 ### Why? ###
